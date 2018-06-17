@@ -3,6 +3,7 @@ title: "Road Accidents Involving Cyclists"
 author: "Jan Schubert"
 date: "17 June 2018"
 output: ioslides_presentation
+widescreen: true
 ---
 
 ```{r setup, include=FALSE}
