@@ -1,0 +1,36 @@
+---
+title: "Road Accidents Involving Cyclists"
+author: "Jan Schubert"
+date: "17 June 2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message = FALSE)
+```
+
+## About The Data
+
+- This presentations shows a relationship between number of people cycling and number of road accidents involving a cyclist relative to the population.
+
+- The data comes from the European Statistical Office.
+
+## Road Accidents Involving Cyclists 
+Countries above the line have higher than expected % of road accidents involving cyclists and vice versa
+
+```{r cars}
+library(plotly)
+library(ggplot2)
+
+cyclingData <- read.csv("cyclingData.csv")
+cyclingData$once_a_day <- cyclingData$once_a_day*100 #convert to same units
+
+p <- ggplot(data=cyclingData,aes(once_a_day,Pr_of_fatalities_cycling))+
+    geom_point(alpha=0.75)+
+    geom_smooth(method="lm",se = FALSE)+
+    geom_text(aes(label=country),nudge_y=0.75,alpha=0.75)+
+    xlab("% of people cycling at least once a day")+
+    ylab("% of road fatalies involving a cyclist")+
+    theme_classic()
+ggplotly(p)
+```
